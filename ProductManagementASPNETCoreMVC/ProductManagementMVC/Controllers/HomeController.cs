@@ -1,32 +1,26 @@
+using BusinessObjects.Models;
 using Microsoft.AspNetCore.Mvc;
 using ProductManagementMVC.Models;
-using System.Diagnostics;
+using System.Net.Http;
 
-namespace ProductManagementMVC.Controllers
+public class HomeController : Controller
 {
-    public class HomeController : Controller
+    private readonly HttpClient _client;
+    private readonly string _baseUrl;
+
+    public HomeController(IConfiguration config)
     {
-        private readonly ILogger<HomeController> _logger;
+        _baseUrl = config["ApiSettings:BaseUrl"];
+        _client = new HttpClient { BaseAddress = new Uri(_baseUrl) };
+    }
 
-        public HomeController(ILogger<HomeController> logger)
-        {
-            _logger = logger;
-        }
+    public async Task<IActionResult> Index()
+    {
+        var dashboard = new DashboardViewModel();
 
-        public IActionResult Index()
-        {
-            return View();
-        }
+        var products = await _client.GetFromJsonAsync<List<Product>>("products");
+        dashboard.TotalProducts = products?.Count ?? 0;
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
+        return View(dashboard);
     }
 }

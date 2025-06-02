@@ -1,8 +1,31 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model DashboardViewModel
+@{
+    ViewData["Title"] = "Dashboard";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="container py-5">
+    <div class="text-center mb-5">
+        <img src="~/img/Logo_FPT_Education.png" alt="FPT Logo" style="max-height: 100px;" class="mb-3" />
+        <h1 class="display-5 fw-bold">Team 5 - Admin Dashboard</h1>
+        <p class="text-muted">Manage your store data with clarity and speed.</p>
+    </div>
+
+    <div class="row justify-content-center text-center">
+        <div class="col-md-4 mb-4">
+            <div class="card border-primary shadow h-100">
+                <div class="card-body">
+                    <h5 class="card-title text-primary">Products</h5>
+                    <h2 class="fw-bold">@Model.TotalProducts</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ✅ Button đi tới trang Products -->
+    <div class="mt-4 text-center">
+        <a class="btn btn-outline-primary btn-lg" asp-controller="Products" asp-action="Index">
+            <i class="fa-solid fa-box-open me-2"></i> Go to Products
+        </a>
+    </div>
+
 </div>
