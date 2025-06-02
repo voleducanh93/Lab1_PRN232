@@ -1,0 +1,16 @@
+﻿@model BusinessObjects.Models.Product
+
+@{
+    ViewData["Title"] = "Product Details";
+}
+
+<h2>Product Details</h2>
+
+<div>
+    <p><strong>Product Name:</strong> @Model.ProductName</p>
+    <p><strong>Category ID:</strong> @Model.CategoryId</p>
+    <p><strong>Units In Stock:</strong> @Model.UnitsInStock</p>
+    <p><strong>Unit Price:</strong> @Model.UnitPrice</p>
+</div>
+
+<a asp-action="Index" class="btn btn-secondary">Back</a>

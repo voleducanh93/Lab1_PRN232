@@ -1,0 +1,22 @@
+﻿@model BusinessObjects.Models.Product
+
+@{
+    ViewData["Title"] = "Delete Product";
+}
+
+<h2>Delete Product</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <p><strong>Product Name:</strong> @Model.ProductName</p>
+    <p><strong>Category ID:</strong> @Model.CategoryId</p>
+    <p><strong>Units In Stock:</strong> @Model.UnitsInStock</p>
+    <p><strong>Unit Price:</strong> @Model.UnitPrice</p>
+</div>
+
+<form asp-action="Delete" method="post">
+    <input type="hidden" asp-for="ProductId" />
+    <button type="submit" class="btn btn-danger">Delete</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>
+
